@@ -1,5 +1,6 @@
 package net.fexcraft.mod.fmt;
 
+import net.fexcraft.mod.lib.util.registry.RegistryUtil.AutoRegisterer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,11 +13,13 @@ public class FMT {
     public static final String MODID = "fmt";
     public static final String NAME = "Fexcraft Modelling Toolbox";
     public static final String VERSION = "1.0";
+    private static AutoRegisterer registerer;
     private static Logger logger;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger = event.getModLog();
+        registerer = new AutoRegisterer(MODID);
     }
 
     @EventHandler
@@ -24,7 +27,11 @@ public class FMT {
     	//
     }
     
-    public static Logger getLogger(){
+    public static final AutoRegisterer getAutoRegisterer(){
+    	return registerer;
+    }
+    
+    public static final Logger getLogger(){
     	return logger;
     }
     
