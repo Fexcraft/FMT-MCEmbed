@@ -24,9 +24,9 @@ public abstract class EditorShapeCompound {
 
 	public abstract NBTTagCompound writeToNBT(NBTTagCompound compound);
 	
-	public abstract EditorShape parse(String string, String type);
+	public abstract EditorShapeCompound parse(String string, String type);
 	
-	public abstract EditorShape write(StringBuffer buff, String type);
+	public abstract EditorShapeCompound write(StringBuffer buff, String type);
 
 	public abstract int addShape(int id, EditorShape object);
 	

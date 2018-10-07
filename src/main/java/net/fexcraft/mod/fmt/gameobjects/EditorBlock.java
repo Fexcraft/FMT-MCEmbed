@@ -3,8 +3,6 @@ package net.fexcraft.mod.fmt.gameobjects;
 import java.util.Random;
 
 import net.fexcraft.mod.fmt.FMT;
-import net.fexcraft.mod.fmt.polygons.TMTCompound;
-import net.fexcraft.mod.fmt.polygons.cuboid.TMTCuboid;
 import net.fexcraft.mod.lib.api.block.fBlock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

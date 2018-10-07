@@ -13,9 +13,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TMTCuboid extends EditorShape {
 	
 	@SideOnly(Side.CLIENT)
-	private ModelRendererTurbo turbo;
-	private Vec3f size, pos, off, rot;
-	private int texX, texY;
+	protected ModelRendererTurbo turbo;
+	protected Vec3f size, pos, off, rot;
+	protected int texX, texY;
 	
 	public TMTCuboid(){
 		size = new Vec3f(4, 4, 4);

@@ -47,13 +47,13 @@ public class TMTCompound extends EditorShapeCompound {
 	}
 
 	@Override
-	public EditorShape parse(String string, String type){
+	public EditorShapeCompound parse(String string, String type){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EditorShape write(StringBuffer buff, String type){
+	public EditorShapeCompound write(StringBuffer buff, String type){
 		// TODO Auto-generated method stub
 		return null;
 	}
