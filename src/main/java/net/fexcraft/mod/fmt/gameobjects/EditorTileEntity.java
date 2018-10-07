@@ -89,8 +89,14 @@ public class EditorTileEntity extends TileEntity implements IPacketReceiver<Pack
 	public void processClientPacket(PacketTileEntityUpdate packet){
 		if(packet.nbt.hasKey("task")){
 			switch(packet.nbt.getString("task")){
-				case "test": {
-					break; //TODO
+				case "update_shape": {
+					EditorShapeCompound compound = this.getPolygons().get(packet.nbt.getString("group"));
+					if(compound == null) return;
+					int id = packet.nbt.getInteger("shape");
+					if(id < 0 || id >= compound.getEditorShapes().size()) return;
+					compound.getEditorShapes().get(id).readFromNBT(packet.nbt);
+					compound.getEditorShapes().get(id).recompile(textureX, textureY);
+					break;
 				}
 			}
 		}
@@ -116,6 +122,16 @@ public class EditorTileEntity extends TileEntity implements IPacketReceiver<Pack
 
 	public void update(){
 		ApiUtil.sendTileEntityUpdatePacket(this, Print.debugR(getUpdateTag()), 256);
+	}
+	
+	public void updateShape(String group, int id){
+		if(!this.polygons.containsKey(group) || id >= this.polygons.get(group).getEditorShapes().size() || id < 0) return;
+		NBTTagCompound compound = new NBTTagCompound();
+		compound.setString("task", "update_shape");
+		compound.setString("group", group);
+		compound.setInteger("shape", id);
+		compound = this.polygons.get(group).getEditorShapes().get(id).writeToNBT(compound);
+		ApiUtil.sendTileEntityUpdatePacket(this, compound, 256);
 	}
 
 }

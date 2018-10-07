@@ -1,7 +1,7 @@
 package net.fexcraft.mod.fmt.polygons;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -34,7 +34,7 @@ public abstract class EditorShapeCompound {
 	
 	public abstract void apply(int id, String key, float value, @Nullable Object obj);
 	
-	public abstract Collection<EditorShape> getEditorShapes();
+	public abstract List<EditorShape> getEditorShapes();
 	
 	protected boolean valid(int id){
 		return getEditorShapes().isEmpty() ? false : id > 0 && id < getEditorShapes().size();

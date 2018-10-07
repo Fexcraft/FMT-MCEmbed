@@ -1,7 +1,7 @@
 package net.fexcraft.mod.fmt.polygons;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import net.fexcraft.mod.fmt.gameobjects.EditorTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,7 +75,7 @@ public class TMTCompound extends EditorShapeCompound {
 	}
 
 	@Override
-	public Collection<EditorShape> getEditorShapes(){
+	public List<EditorShape> getEditorShapes(){
 		return shapes;
 	}
 	
