@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = FMT.MODID, name = FMT.NAME, version = FMT.VERSION)
+@Mod(modid = FMT.MODID, name = FMT.NAME, version = FMT.VERSION, dependencies = "required-after:fcl;")
 public class FMT {
 	
     public static final String MODID = "fmt";
