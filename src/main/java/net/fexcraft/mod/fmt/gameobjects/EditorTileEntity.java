@@ -5,6 +5,8 @@ import java.util.TreeMap;
 import net.fexcraft.mod.fmt.polygons.EditorShapeCompound;
 import net.fexcraft.mod.lib.api.network.IPacketReceiver;
 import net.fexcraft.mod.lib.network.packet.PacketTileEntityUpdate;
+import net.fexcraft.mod.lib.util.common.ApiUtil;
+import net.fexcraft.mod.lib.util.common.Print;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EditorTileEntity extends TileEntity implements IPacketReceiver<PacketTileEntityUpdate> {
 	
 	private TreeMap<String, EditorShapeCompound> polygons = new TreeMap<>();
+	public int textureX = 256, textureY = 256;
 
 	public EditorTileEntity(){ }
 
@@ -109,6 +112,10 @@ public class EditorTileEntity extends TileEntity implements IPacketReceiver<Pack
 
 	public TreeMap<String, EditorShapeCompound> getPolygons(){
 		return polygons;
+	}
+
+	public void update(){
+		ApiUtil.sendTileEntityUpdatePacket(this, Print.debugR(getUpdateTag()), 256);
 	}
 
 }

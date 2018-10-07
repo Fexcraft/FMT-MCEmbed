@@ -1,5 +1,9 @@
 package net.fexcraft.mod.fmt;
 
+import net.fexcraft.mod.fmt.polygons.EditorShape;
+import net.fexcraft.mod.fmt.polygons.EditorShapeCompound;
+import net.fexcraft.mod.fmt.polygons.TMTCompound;
+import net.fexcraft.mod.fmt.polygons.cuboid.TMTCuboid;
 import net.fexcraft.mod.lib.util.registry.RegistryUtil.AutoRegisterer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +28,10 @@ public class FMT {
 
     @EventHandler
     public void init(FMLInitializationEvent event){
+    	EditorShapeCompound.SHAPECOMPOUND_DICTIONARY.put("tmt", TMTCompound.class);
     	//
+    	EditorShape.SHAPE_DICTIONARY.put("tmt.box", TMTCuboid.class);
+    	EditorShape.SHAPE_DICTIONARY.put("tmt.cube", TMTCuboid.class);
     }
     
     public static final AutoRegisterer getAutoRegisterer(){

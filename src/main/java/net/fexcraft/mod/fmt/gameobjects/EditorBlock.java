@@ -3,6 +3,8 @@ package net.fexcraft.mod.fmt.gameobjects;
 import java.util.Random;
 
 import net.fexcraft.mod.fmt.FMT;
+import net.fexcraft.mod.fmt.polygons.TMTCompound;
+import net.fexcraft.mod.fmt.polygons.cuboid.TMTCuboid;
 import net.fexcraft.mod.lib.api.block.fBlock;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -112,7 +114,14 @@ public class EditorBlock extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
         if(!world.isRemote){
-            //TODO
+            EditorTileEntity tile = (EditorTileEntity)world.getTileEntity(pos); if(tile == null) return false;
+            if(!tile.getPolygons().containsKey("core")){
+            	tile.getPolygons().put("core", new TMTCompound());
+            }
+            TMTCuboid cube = new TMTCuboid();
+            cube.apply("pos_y", tile.getPolygons().size() * -8, null);
+            tile.getPolygons().get("core").addShape(-1, cube);
+            tile.update();
         }
         return false;
     }

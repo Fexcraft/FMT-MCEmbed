@@ -25,7 +25,7 @@ public abstract class EditorShape {
 	public abstract void apply(String key, float value, @Nullable Object obj);
 	
 	@SideOnly(Side.CLIENT) /** recompile (or compile if new) a new display list for this shape */
-	public abstract void recompile();
+	public abstract void recompile(int texX, int texY);
 	
 	@Nullable
 	public static EditorShape newShape(String type, NBTTagCompound compound){
@@ -41,7 +41,7 @@ public abstract class EditorShape {
 
 	public abstract EditorShape readFromNBT(NBTTagCompound compound);
 	
-	public abstract NBTTagCompound writToNBT(NBTTagCompound compound);
+	public abstract NBTTagCompound writeToNBT(NBTTagCompound compound);
 	
 	public abstract EditorShape parse(String string, String type);
 	
