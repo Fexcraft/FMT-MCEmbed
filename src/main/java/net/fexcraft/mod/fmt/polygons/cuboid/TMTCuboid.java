@@ -14,13 +14,14 @@ public class TMTCuboid extends EditorShape {
 	
 	@SideOnly(Side.CLIENT)
 	private ModelRendererTurbo turbo;
-	private Vec3f size, pos, off;
+	private Vec3f size, pos, off, rot;
 	private int texX, texY;
 	
 	public TMTCuboid(){
 		size = new Vec3f(4, 4, 4);
 		pos = new Vec3f(0, 0, 0);
 		off = new Vec3f(0, 0, 0);
+		rot = new Vec3f(0, 0, 0);
 		texX = texY = 0;
 	}
 
@@ -39,31 +40,39 @@ public class TMTCuboid extends EditorShape {
 			case "pos_x": pos.xCoord = value; break;
 			case "pos_y": pos.yCoord = value; break;
 			case "pos_z": pos.zCoord = value; break;
+			case "rot_x": rot.xCoord = value; break;
+			case "rot_y": rot.yCoord = value; break;
+			case "rot_z": rot.zCoord = value; break;
 		}
 	}
 
 	@SideOnly(Side.CLIENT) @Override
 	public void recompile(int texx, int texy){
 		if(turbo != null){ GL11.glDeleteLists(turbo.displaylist(), 0); turbo = null; }
-		turbo = new ModelRendererTurbo(null, texx, texy, texX, texY);
+		turbo = new ModelRendererTurbo(null, texx == -1 ? 256 : texx, texy == -1 ? 256 : texy, texX, texY);
 		turbo.addBox(off.xCoord, off.yCoord, off.zCoord, size.xCoord, size.yCoord, size.zCoord);
 		turbo.setRotationPoint(pos.xCoord, pos.yCoord, pos.zCoord);
+		turbo.rotateAngleX = rot.xCoord; turbo.rotateAngleY = rot.yCoord; turbo.rotateAngleZ = rot.zCoord;
 	}
 
 	@Override
 	public EditorShape readFromNBT(NBTTagCompound compound){
 		size = new Vec3f(compound.getFloat("width"), compound.getFloat("height"), compound.getFloat("depth"));
 		pos = new Vec3f(compound.getFloat("pos_x"), compound.getFloat("pos_y"), compound.getFloat("pos_z"));
+		rot = new Vec3f(compound.getFloat("rot_x"), compound.getFloat("rot_y"), compound.getFloat("rot_z"));
 		off = new Vec3f(compound.getFloat("off_x"), compound.getFloat("off_y"), compound.getFloat("off_z"));
-		texX = compound.getInteger("texture_x"); texY = compound.getInteger("texture_y"); return this;
+		texX = compound.getInteger("texture_x"); texY = compound.getInteger("texture_y");
+		return this;
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound){
 		compound.setFloat("width", size.xCoord); compound.setFloat("height", size.yCoord); compound.setFloat("depth", size.zCoord);
 		compound.setFloat("pos_x", pos.xCoord); compound.setFloat("pos_y", pos.yCoord); compound.setFloat("pos_z", pos.zCoord);
+		compound.setFloat("rot_x", rot.xCoord); compound.setFloat("rot_y", rot.yCoord); compound.setFloat("rot_z", rot.zCoord);
 		compound.setFloat("off_x", off.xCoord); compound.setFloat("off_y", off.yCoord); compound.setFloat("off_z", off.zCoord);
-		compound.setFloat("texture_x", texX); compound.setFloat("texture_y", texY); return compound;
+		compound.setFloat("texture_x", texX); compound.setFloat("texture_y", texY);
+		compound.setString("type", "tmt.cube"); return compound;
 	}
 
 	@Override

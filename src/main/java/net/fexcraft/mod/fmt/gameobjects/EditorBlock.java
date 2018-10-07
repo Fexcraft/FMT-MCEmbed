@@ -113,15 +113,15 @@ public class EditorBlock extends BlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ){
-        if(!world.isRemote){
-            EditorTileEntity tile = (EditorTileEntity)world.getTileEntity(pos); if(tile == null) return false;
+        if(!world.isRemote && hand == EnumHand.MAIN_HAND){
+            /*EditorTileEntity tile = (EditorTileEntity)world.getTileEntity(pos); if(tile == null) return false;
             if(!tile.getPolygons().containsKey("core")){
             	tile.getPolygons().put("core", new TMTCompound());
             }
             TMTCuboid cube = new TMTCuboid();
-            cube.apply("pos_y", tile.getPolygons().size() * -8, null);
+            cube.apply("pos_y", tile.getPolygons().get("core").getEditorShapes().size() * -8, null);
             tile.getPolygons().get("core").addShape(-1, cube);
-            tile.update();
+            tile.update();*/
         }
         return false;
     }

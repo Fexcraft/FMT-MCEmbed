@@ -55,7 +55,7 @@ public class EditorTileEntity extends TileEntity implements IPacketReceiver<Pack
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound){
-		super.readFromNBT(compound);
+		super.readFromNBT(compound); getPolygons().clear();
 		if(!compound.hasKey("PolygonCompounds")) return;
 		int amount = compound.getInteger("PolygonCompounds");
 		for(int i = 0; i < amount; i++){
@@ -95,7 +95,7 @@ public class EditorTileEntity extends TileEntity implements IPacketReceiver<Pack
 			}
 		}
 		else{
-			this.readFromNBT(packet.nbt);
+			this.readFromNBT(Print.debugR(packet.nbt));
 		}
 	}
 

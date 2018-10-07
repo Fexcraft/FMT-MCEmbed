@@ -26,7 +26,7 @@ public class TMTCompound extends EditorShapeCompound {
 		for(int i = 0; i < amount; i++){
 			NBTTagCompound com = compound.getCompoundTag("Shape" + i);
 			if(com == null) continue;
-			Class<? extends EditorShape> clazz = EditorShape.SHAPE_DICTIONARY.get(com.getString("key"));
+			Class<? extends EditorShape> clazz = EditorShape.SHAPE_DICTIONARY.get(com.getString("type"));
 			if(clazz == null) continue; try{
 				addShape(-1, clazz.newInstance().readFromNBT(com));
 			} catch(Exception e){ e.printStackTrace(); continue; }
@@ -42,7 +42,7 @@ public class TMTCompound extends EditorShapeCompound {
 				NBTTagCompound com = shapes.get(i).writeToNBT(new NBTTagCompound());
 				if(com != null) compound.setTag("Shape" + i, com); 
 			}
-		}
+		} compound.setString("type", "tmt");
 		return compound;
 	}
 
